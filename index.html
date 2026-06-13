@@ -405,9 +405,8 @@ tbody tr.cur td:first-child{border-left:3px solid var(--g2);}
       <div class="hdr-title">LTMS</div>
     </div>
     <div class="hdr-r">
-      <button class="hbtn sq" onclick="toggleTheme()" id="thBtn">
-        <svg id="svgMoon" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/></svg>
-        <svg id="svgSun" viewBox="0 0 24 24" style="display:none"><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0 .39-.39.39-1.03 0-1.41l-1.06-1.06zm1.06-12.37l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06c.39-.39.39-1.03 0-1.41s-1.03-.39-1.41 0zM7.05 18.36l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06c.39-.39.39-1.03 0-1.41s-1.03-.39-1.41 0z"/></svg>
+      <button class="hbtn sq" onclick="confirmExit()" title="Keluar">
+        <svg viewBox="0 0 24 24"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
       </button>
       <div class="lsw">
         <button class="hbtn" onclick="toggleLS()" id="lsBtn">
@@ -505,6 +504,38 @@ tbody tr.cur td:first-child{border-left:3px solid var(--g2);}
     <!-- PENGATURAN -->
     <div class="page" id="pgPengaturan">
       <div class="sett-sec"><div class="sett-sec-lbl">Kelola Pinjaman</div><div id="lmCards"></div><div id="addLoanWrap"></div></div>
+      <div class="sett-sec">
+        <div class="sett-sec-lbl">Tampilan</div>
+        <div class="sett-card">
+          <div class="srow" onclick="toggleTheme()" style="cursor:pointer;">
+            <div class="si si-g" id="themeRowIcon">
+              <svg id="thIconMoon" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/></svg>
+              <svg id="thIconSun" viewBox="0 0 24 24" style="display:none"><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1z"/></svg>
+            </div>
+            <div class="srow-info">
+              <div class="srow-t" id="themeRowTitle">Mode Terang</div>
+              <div class="srow-s" id="themeRowSub">Beralih ke tampilan gelap</div>
+            </div>
+            <!-- Premium toggle switch -->
+            <div id="thSwitch" style="
+              width:52px;height:30px;border-radius:99px;
+              background:var(--g2);
+              position:relative;flex-shrink:0;
+              box-shadow:0 0 0 3px rgba(0,166,81,0.15),0 2px 8px rgba(0,166,81,0.25);
+              transition:background .35s ease,box-shadow .35s ease;
+              cursor:pointer;">
+              <div id="thThumb" style="
+                position:absolute;top:3px;right:3px;
+                width:24px;height:24px;border-radius:50%;
+                background:#fff;
+                box-shadow:0 2px 8px rgba(0,0,0,0.18),0 0 0 1px rgba(0,0,0,0.04);
+                transition:right .35s cubic-bezier(.34,1.56,.64,1),left .35s cubic-bezier(.34,1.56,.64,1),transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .35s ease;
+                display:flex;align-items:center;justify-content:center;
+                font-size:12px;line-height:1;">&#9728;</div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="sett-sec">
         <div class="sett-sec-lbl">Keamanan</div>
         <div class="sett-card">
@@ -657,7 +688,53 @@ const MONS_S=['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov',
 let PIN_H=localStorage.getItem(PSK)||btoa('700115');
 let buf='',aIdx=0,noteIdx=null,editMode=false,curPg='Beranda';
 
-function applyTheme(t){document.documentElement.setAttribute('data-theme',t);document.getElementById('svgMoon').style.display=t==='dark'?'none':'block';document.getElementById('svgSun').style.display=t==='dark'?'block':'none';document.getElementById('themeColorMeta').content=t==='dark'?'#0a1628':'#00a651';localStorage.setItem(TSK,t);}
+function applyTheme(t){
+  document.documentElement.setAttribute('data-theme',t);
+  document.getElementById('themeColorMeta').content=t==='dark'?'#0a1628':'#00a651';
+  localStorage.setItem(TSK,t);
+  const isDark=t==='dark';
+
+  // Label
+  const title=document.getElementById('themeRowTitle');
+  const sub=document.getElementById('themeRowSub');
+  if(title) title.textContent=isDark?'Mode Gelap':'Mode Terang';
+  if(sub) sub.textContent=isDark?'Beralih ke tampilan terang':'Beralih ke tampilan gelap';
+
+  // Ikon di samping
+  const moon=document.getElementById('thIconMoon');
+  const sun=document.getElementById('thIconSun');
+  if(moon) moon.style.display=isDark?'block':'none';
+  if(sun) sun.style.display=isDark?'none':'block';
+
+  // Premium switch
+  const sw=document.getElementById('thSwitch');
+  const thumb=document.getElementById('thThumb');
+  if(sw && thumb){
+    if(isDark){
+      sw.style.background='#2a3a4a';
+      sw.style.boxShadow='0 0 0 3px rgba(100,120,150,0.15),0 2px 8px rgba(0,0,0,0.3)';
+      thumb.style.right='auto';
+      thumb.style.left='3px';
+      thumb.style.transform='scale(1)';
+      thumb.style.boxShadow='0 2px 8px rgba(0,0,0,0.3),0 0 0 1px rgba(0,0,0,0.08)';
+      thumb.innerHTML='&#9790;'; // bulan
+      thumb.style.background='#e0e8f0';
+    } else {
+      sw.style.background='var(--g2)';
+      sw.style.boxShadow='0 0 0 3px rgba(0,166,81,0.15),0 2px 8px rgba(0,166,81,0.25)';
+      thumb.style.left='auto';
+      thumb.style.right='3px';
+      thumb.style.transform='scale(1)';
+      thumb.style.boxShadow='0 2px 8px rgba(0,0,0,0.18),0 0 0 1px rgba(0,0,0,0.04)';
+      thumb.innerHTML='&#9728;'; // matahari
+      thumb.style.background='#fff';
+    }
+    // Bounce effect
+    thumb.style.transform='scale(0.85)';
+    setTimeout(()=>{ thumb.style.transform='scale(1.1)'; },150);
+    setTimeout(()=>{ thumb.style.transform='scale(1)'; },280);
+  }
+}
 function toggleTheme(){applyTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark');}
 applyTheme(localStorage.getItem(TSK)||'light');
 
@@ -739,7 +816,18 @@ function openNote(i){noteIdx=i;const d=gd();const p=d.loans[aIdx].payments[i];do
 function closeNote(){document.getElementById('noteMov').classList.remove('show');noteIdx=null;}
 function saveNote(){if(noteIdx===null)return;const d=gd();d.loans[aIdx].payments[noteIdx].note=document.getElementById('noteTA').value.trim();sd(d);closeNote();render(d);toast('Catatan disimpan');}
 
-function goPage(name,btn){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.ni').forEach(n=>n.classList.remove('active'));document.getElementById('pg'+name).classList.add('active');btn.classList.add('active');document.getElementById('pages').scrollTop=0;curPg=name;updateFAB();if(name!=='Beranda'){const d=gd();if(d&&d.loans&&d.loans.length)render(d);}}
+function goPage(name,btn){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.ni').forEach(n=>n.classList.remove('active'));
+  document.getElementById('pg'+name).classList.add('active');
+  btn.classList.add('active');
+  document.getElementById('pages').scrollTop=0;
+  curPg=name;
+  updateFAB();
+  // Selalu render ulang saat pindah halaman
+  const d=gd();
+  if(d&&d.loans&&d.loans.length>0) render(d);
+}
 
 function updateFAB(){const d=gd();const show=curPg==='Beranda'&&(!d||!d.loans||d.loans.length<MAX_L)&&document.getElementById('dashWrap').style.display!=='none';document.getElementById('fab').classList.toggle('hid',!show);}
 
@@ -783,7 +871,18 @@ function render(d){
   const tb=document.getElementById('tBody');tb.innerHTML='';
   pay.forEach((p,i)=>{const iC=p.month===nowM&&p.year===nowY;const tr=document.createElement('tr');if(iC)tr.classList.add('cur');const hn=p.note&&p.note.length>0;tr.innerHTML='<td class="row-no">'+String(i+1).padStart(2,'0')+'</td><td class="row-mo">'+MONS[p.month-1]+' '+p.year+(iC?'<span class="cur-tag">Kini</span>':'')+'</td><td class="row-amt">'+fmt(loan.inst)+'</td><td><select class="ssel '+(p.paid?'paid':'unpaid')+'" onchange="handleTgl('+i+',this)"><option value="1" '+(p.paid?'selected':'')+'>Lunas</option><option value="0" '+(!p.paid?'selected':'')+'>Belum</option></select></td><td><button class="nbtn '+(hn?'has':'')+'" onclick="openNote('+i+')">'+(hn?'N':'+')+' </button>'+(hn?'<div class="ntip">'+p.note+'</div>':'')+'</td>';tb.appendChild(tr);});
   const cr=tb.querySelector('.cur');if(cr)setTimeout(()=>cr.scrollIntoView({behavior:'smooth',block:'center'}),300);
-  const cb=document.getElementById('chartBars');cb.innerHTML='';pay.forEach(p=>{const w=document.createElement('div');w.className='cbw';const b=document.createElement('div');b.className='cb '+(p.paid?'paid':'unpaid');b.style.height=p.paid?'100%':'28%';b.setAttribute('data-tip',MONS_S[p.month-1]+' '+p.year+(p.paid?' ok':''));const l=document.createElement('div');l.className='cbl';l.textContent=MONS_S[p.month-1].charAt(0);w.appendChild(b);w.appendChild(l);cb.appendChild(w);});
+  const cb=document.getElementById('chartBars');cb.innerHTML='';
+  pay.forEach((p,idx)=>{
+    const w=document.createElement('div');w.className='cbw';
+    const b=document.createElement('div');
+    b.className='cb '+(p.paid?'paid':'unpaid');
+    b.style.height=p.paid?'100%':'20%';
+    b.style.minHeight='6px';
+    b.setAttribute('data-tip',MONS_S[p.month-1]+' '+p.year+(p.paid?' ✓':''));
+    const l=document.createElement('div');l.className='cbl';
+    l.textContent=idx%3===0?MONS_S[p.month-1].charAt(0):'';
+    w.appendChild(b);w.appendChild(l);cb.appendChild(w);
+  });
   const ya=document.getElementById('yrAcc');ya.innerHTML='';[{lbl:'Tahun ke-1',s:0},{lbl:'Tahun ke-2',s:12},{lbl:'Tahun ke-3',s:24}].forEach(({lbl,s})=>{const mons=pay.slice(s,s+12),pn=mons.filter(m=>m.paid).length,pa=pn*loan.inst,pct2=Math.round(pn/12*100),done=pn===12;const r=MONS_S[mons[0].month-1]+' '+mons[0].year+' - '+MONS_S[mons[11].month-1]+' '+mons[11].year;const item=document.createElement('div');item.className='yr';item.innerHTML='<div class="yr-h" onclick="this.closest(\'.yr\').classList.toggle(\'open\')"><div class="yr-hl"><span class="yr-n">'+lbl+'</span><span class="yr-r">'+r+'</span><span class="yr-b '+(done?'done':'')+'">'+(done?'Lunas':pn+'/12')+'</span></div><span class="yr-arrow">&#9660;</span></div><div class="yr-body"><div class="yr-sum"><div><div class="yr-sv">'+pn+'</div><div class="yr-sl">Lunas</div></div><div><div class="yr-sv" style="font-size:13px;">'+fmt(pa)+'</div><div class="yr-sl">Dibayar</div></div><div><div class="yr-sv">'+pct2+'%</div><div class="yr-sl">Progress</div></div></div><div class="yr-pt"><div class="yr-pf" style="width:'+pct2+'%"></div></div></div>';ya.appendChild(item);});
   renderSL(d);renderLS(d);updateLSLbl(d);buildIB(d);updateFAB();
 }
