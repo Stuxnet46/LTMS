@@ -229,21 +229,63 @@ tbody tr.cur td:first-child{border-left:3px solid var(--g2);}
 .ntip{font-size:9px;color:var(--text3);margin-top:2px;font-style:italic;max-width:110px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 
 /* CHART */
-.gc{background:var(--card);margin:12px 14px;border-radius:var(--r);padding:18px;box-shadow:var(--shadow-sm);border:1px solid var(--border2);}
-.gc-t{font-size:13px;font-weight:800;color:var(--text);margin-bottom:14px;display:flex;align-items:center;gap:8px;letter-spacing:-0.01em;}
+.gc{background:var(--card);margin:12px 14px;border-radius:var(--r);padding:20px;box-shadow:var(--shadow-sm);border:1px solid var(--border2);}
+.gc-t{font-size:14px;font-weight:800;color:var(--text);margin-bottom:6px;display:flex;align-items:center;gap:8px;letter-spacing:-0.01em;}
+.gc-sub{font-size:11px;color:var(--text3);margin-bottom:16px;font-weight:500;}
 .gc-dot{width:8px;height:8px;border-radius:50%;background:var(--g2);flex-shrink:0;box-shadow:0 0 6px rgba(0,166,81,0.4);}
-.chart-wrap{overflow-x:auto;padding-bottom:4px;}
-.chart-bars{display:flex;align-items:flex-end;gap:4px;height:90px;min-width:max-content;padding:0 2px;}
-.cbw{display:flex;flex-direction:column;align-items:center;gap:3px;flex:1;min-width:15px;}
-.cb{width:100%;border-radius:4px 4px 0 0;transition:height .7s cubic-bezier(.16,1,.3,1);cursor:pointer;position:relative;}
-.cb.paid{background:var(--g2);}
-.cb.unpaid{background:var(--bg2);border:1px solid var(--border2);}
-[data-theme="dark"] .cb.unpaid{background:#1a3a2a;}
-.cb:hover::after{content:attr(data-tip);position:absolute;bottom:calc(100%+6px);left:50%;transform:translateX(-50%);background:var(--text);color:var(--card);font-size:10px;padding:4px 8px;border-radius:6px;white-space:nowrap;z-index:10;pointer-events:none;font-weight:600;}
-.cbl{font-size:8px;color:var(--text3);font-weight:600;}
-.chart-legend{display:flex;gap:14px;margin-top:10px;justify-content:flex-end;}
-.leg{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--text3);font-weight:600;}
-.leg-d{width:8px;height:8px;border-radius:2px;}
+.chart-outer{position:relative;height:140px;margin-bottom:8px;}
+.chart-grid{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;pointer-events:none;}
+.chart-grid-line{height:1px;background:var(--border2);width:100%;}
+.chart-canvas-wrap{position:absolute;inset:0;overflow-x:auto;overflow-y:hidden;}
+.chart-canvas-wrap::-webkit-scrollbar{display:none;}
+.chart-bars-new{display:flex;align-items:flex-end;gap:3px;height:100%;padding:0 2px;min-width:max-content;}
+.cbar{
+  display:flex;flex-direction:column;align-items:center;
+  gap:0;flex:1;min-width:18px;max-width:24px;
+  height:100%;justify-content:flex-end;
+  position:relative;cursor:pointer;
+}
+.cbar-fill{
+  width:100%;border-radius:6px 6px 0 0;
+  transition:height .6s cubic-bezier(.16,1,.3,1),opacity .3s;
+  position:relative;min-height:4px;
+}
+.cbar-fill.paid{
+  background:linear-gradient(180deg,var(--g1) 0%,var(--g2) 100%);
+  box-shadow:0 -2px 8px rgba(0,200,83,0.25);
+}
+.cbar-fill.unpaid{
+  background:var(--bg2);
+  border:1px solid var(--border2);
+  opacity:0.7;
+}
+[data-theme="dark"] .cbar-fill.unpaid{background:#1e3328;}
+.cbar-fill.current{
+  background:linear-gradient(180deg,#ffab40 0%,#f57c00 100%);
+  box-shadow:0 -2px 10px rgba(245,124,0,0.35);
+}
+.cbar:hover .cbar-fill{opacity:0.85;transform:scaleY(1.03);transform-origin:bottom;}
+.cbar-tip{
+  display:none;position:absolute;bottom:calc(100% + 8px);left:50%;
+  transform:translateX(-50%);
+  background:var(--text);color:var(--card);
+  font-size:10px;font-weight:700;padding:5px 9px;border-radius:8px;
+  white-space:nowrap;z-index:10;pointer-events:none;
+  box-shadow:0 4px 12px rgba(0,0,0,0.2);
+}
+.cbar-tip::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:4px solid transparent;border-top-color:var(--text);}
+.cbar:hover .cbar-tip{display:block;}
+.chart-x-labels{display:flex;gap:3px;padding:6px 2px 0;min-width:max-content;overflow-x:hidden;}
+.cxlbl{flex:1;min-width:18px;max-width:24px;text-align:center;font-size:9px;font-weight:700;color:var(--text3);letter-spacing:0.04em;}
+.cxlbl.active{color:var(--g2);}
+.chart-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px;}
+.cs-item{background:var(--g-pale);border-radius:12px;padding:12px 10px;text-align:center;}
+[data-theme="dark"] .cs-item{background:rgba(0,230,118,0.06);}
+.cs-val{font-size:15px;font-weight:900;color:var(--g2);margin-bottom:2px;}
+.cs-lbl{font-size:9px;font-weight:700;color:var(--text3);letter-spacing:0.1em;text-transform:uppercase;}
+.chart-legend{display:flex;gap:14px;margin-top:14px;justify-content:center;flex-wrap:wrap;}
+.leg{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text2);font-weight:600;}
+.leg-d{width:10px;height:10px;border-radius:3px;}
 
 /* YEAR ACCORDION */
 .yr{background:var(--card);margin:0 14px 10px;border-radius:var(--r);box-shadow:var(--shadow-sm);border:1px solid var(--border2);overflow:hidden;}
@@ -491,10 +533,27 @@ tbody tr.cur td:first-child{border-left:3px solid var(--g2);}
     <div class="page" id="pgGrafik">
       <div class="gc" style="margin-top:14px;">
         <div class="gc-t"><div class="gc-dot"></div>Grafik Pembayaran 36 Bulan</div>
-        <div class="chart-wrap"><div class="chart-bars" id="chartBars"></div></div>
+        <div class="gc-sub" id="chartSubtitle">Loading...</div>
+        <!-- Bar chart -->
+        <div class="chart-outer">
+          <div class="chart-grid">
+            <div class="chart-grid-line"></div>
+            <div class="chart-grid-line"></div>
+            <div class="chart-grid-line"></div>
+            <div class="chart-grid-line"></div>
+          </div>
+          <div class="chart-canvas-wrap">
+            <div class="chart-bars-new" id="chartBars"></div>
+          </div>
+        </div>
+        <div class="chart-x-labels" id="chartXLabels"></div>
+        <!-- Summary stats -->
+        <div class="chart-summary" id="chartSummary"></div>
+        <!-- Legend -->
         <div class="chart-legend">
-          <div class="leg"><div class="leg-d" style="background:var(--g2)"></div>Lunas</div>
-          <div class="leg"><div class="leg-d" style="background:var(--bg2);border:1px solid var(--border2)"></div>Belum</div>
+          <div class="leg"><div class="leg-d" style="background:linear-gradient(180deg,var(--g1),var(--g2))"></div>Lunas</div>
+          <div class="leg"><div class="leg-d" style="background:var(--bg2);border:1px solid var(--border2)"></div>Belum Bayar</div>
+          <div class="leg"><div class="leg-d" style="background:linear-gradient(180deg,#ffab40,#f57c00)"></div>Bulan Ini</div>
         </div>
       </div>
       <div class="sec-t">Ringkasan Per Tahun</div>
@@ -871,18 +930,49 @@ function render(d){
   const tb=document.getElementById('tBody');tb.innerHTML='';
   pay.forEach((p,i)=>{const iC=p.month===nowM&&p.year===nowY;const tr=document.createElement('tr');if(iC)tr.classList.add('cur');const hn=p.note&&p.note.length>0;tr.innerHTML='<td class="row-no">'+String(i+1).padStart(2,'0')+'</td><td class="row-mo">'+MONS[p.month-1]+' '+p.year+(iC?'<span class="cur-tag">Kini</span>':'')+'</td><td class="row-amt">'+fmt(loan.inst)+'</td><td><select class="ssel '+(p.paid?'paid':'unpaid')+'" onchange="handleTgl('+i+',this)"><option value="1" '+(p.paid?'selected':'')+'>Lunas</option><option value="0" '+(!p.paid?'selected':'')+'>Belum</option></select></td><td><button class="nbtn '+(hn?'has':'')+'" onclick="openNote('+i+')">'+(hn?'N':'+')+' </button>'+(hn?'<div class="ntip">'+p.note+'</div>':'')+'</td>';tb.appendChild(tr);});
   const cr=tb.querySelector('.cur');if(cr)setTimeout(()=>cr.scrollIntoView({behavior:'smooth',block:'center'}),300);
-  const cb=document.getElementById('chartBars');cb.innerHTML='';
+  // ── CHART ──
+  const paidN=pay.filter(p=>p.paid).length;
+  const cb=document.getElementById('chartBars');
+  const xl=document.getElementById('chartXLabels');
+  const cs=document.getElementById('chartSummary');
+  const csub=document.getElementById('chartSubtitle');
+  cb.innerHTML=''; xl.innerHTML='';
+  if(csub) csub.textContent=paidN+' dari 36 bulan lunas · '+fmt(paidN*loan.inst)+' terbayar';
+
   pay.forEach((p,idx)=>{
-    const w=document.createElement('div');w.className='cbw';
-    const b=document.createElement('div');
-    b.className='cb '+(p.paid?'paid':'unpaid');
-    b.style.height=p.paid?'100%':'20%';
-    b.style.minHeight='6px';
-    b.setAttribute('data-tip',MONS_S[p.month-1]+' '+p.year+(p.paid?' ✓':''));
-    const l=document.createElement('div');l.className='cbl';
-    l.textContent=idx%3===0?MONS_S[p.month-1].charAt(0):'';
-    w.appendChild(b);w.appendChild(l);cb.appendChild(w);
+    const isCur=p.month===nowM&&p.year===nowY;
+    const heightPct=p.paid?88:isCur?45:18;
+
+    // Bar
+    const bar=document.createElement('div');
+    bar.className='cbar';
+    const fill=document.createElement('div');
+    fill.className='cbar-fill '+(isCur?'current':p.paid?'paid':'unpaid');
+    fill.style.height='0%';
+    const tip=document.createElement('div');
+    tip.className='cbar-tip';
+    tip.textContent=MONS_S[p.month-1]+' '+p.year+(p.paid?' ✓':isCur?' ← Kini':'');
+    bar.appendChild(tip);
+    bar.appendChild(fill);
+    cb.appendChild(bar);
+    setTimeout(()=>{ fill.style.height=heightPct+'%'; }, idx*18);
+
+    // X label — tampilkan setiap bulan ke 1 tahun (Jan tiap tahun + bulan pertama)
+    const lbl=document.createElement('div');
+    lbl.className='cxlbl'+(isCur?' active':'');
+    lbl.textContent=(p.month===1||idx===0)?MONS_S[p.month-1].charAt(0)+p.year.toString().slice(2):(idx%3===0?MONS_S[p.month-1].charAt(0):'');
+    xl.appendChild(lbl);
   });
+
+  // Chart summary
+  if(cs){
+    const unpaidAmt=(TENOR-paidN)*loan.inst;
+    cs.innerHTML=`
+      <div class="cs-item"><div class="cs-val">${paidN}</div><div class="cs-lbl">Lunas</div></div>
+      <div class="cs-item"><div class="cs-val" style="color:var(--danger)">${TENOR-paidN}</div><div class="cs-lbl">Belum</div></div>
+      <div class="cs-item"><div class="cs-val" style="font-size:12px;">${fmt(paidN*loan.inst)}</div><div class="cs-lbl">Terbayar</div></div>
+    `;
+  }
   const ya=document.getElementById('yrAcc');ya.innerHTML='';[{lbl:'Tahun ke-1',s:0},{lbl:'Tahun ke-2',s:12},{lbl:'Tahun ke-3',s:24}].forEach(({lbl,s})=>{const mons=pay.slice(s,s+12),pn=mons.filter(m=>m.paid).length,pa=pn*loan.inst,pct2=Math.round(pn/12*100),done=pn===12;const r=MONS_S[mons[0].month-1]+' '+mons[0].year+' - '+MONS_S[mons[11].month-1]+' '+mons[11].year;const item=document.createElement('div');item.className='yr';item.innerHTML='<div class="yr-h" onclick="this.closest(\'.yr\').classList.toggle(\'open\')"><div class="yr-hl"><span class="yr-n">'+lbl+'</span><span class="yr-r">'+r+'</span><span class="yr-b '+(done?'done':'')+'">'+(done?'Lunas':pn+'/12')+'</span></div><span class="yr-arrow">&#9660;</span></div><div class="yr-body"><div class="yr-sum"><div><div class="yr-sv">'+pn+'</div><div class="yr-sl">Lunas</div></div><div><div class="yr-sv" style="font-size:13px;">'+fmt(pa)+'</div><div class="yr-sl">Dibayar</div></div><div><div class="yr-sv">'+pct2+'%</div><div class="yr-sl">Progress</div></div></div><div class="yr-pt"><div class="yr-pf" style="width:'+pct2+'%"></div></div></div>';ya.appendChild(item);});
   renderSL(d);renderLS(d);updateLSLbl(d);buildIB(d);updateFAB();
 }
